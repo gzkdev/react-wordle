@@ -3,7 +3,7 @@ import { useState } from "react";
 /**
  * Interface of a Guess object
  */
-interface Guess {
+export interface Guess {
   key: string;
   color: string;
 }

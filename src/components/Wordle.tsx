@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import useWordle from "../hooks/useWordle";
+import Grid from "./Grid";
 
-interface WordGridProp {
+interface WordleProp {
   solution: string;
 }
 
-function WordGrid({ solution }: WordGridProp) {
+function Wordle({ solution }: WordleProp) {
   const { currentGuess, handleKeyUp, guesses, isCorrect, turn } =
     useWordle(solution);
 
@@ -20,10 +21,11 @@ function WordGrid({ solution }: WordGridProp) {
   }, [guesses, turn, isCorrect]);
   return (
     <div>
-      WordGrid {solution}
+      Wordle {solution}
       <div>Current Guess - {currentGuess}</div>
+      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>
   );
 }
 
-export default WordGrid;
+export default Wordle;

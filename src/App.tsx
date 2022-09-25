@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import WordGrid from "./components/WordGrid";
+import Wordle from "./components/Wordle";
 
 function App() {
   const [solution, setSolution] = useState("");
@@ -21,9 +21,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React Wordle App</h1>
       {/* {solution && <h3>{solution}</h3>} */}
-      {solution && <WordGrid solution={solution} />}
+      {solution && <Wordle solution={solution} />}
     </div>
   );
 }
