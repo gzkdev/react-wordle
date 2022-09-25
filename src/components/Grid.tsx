@@ -1,4 +1,3 @@
-import React from "react";
 import { Guess } from "../hooks/useWordle";
 import Row from "./Row";
 
@@ -12,7 +11,10 @@ function Grid({ currentGuess, guesses, turn }: Prop) {
   return (
     <div className="Grid">
       {guesses.map((guess, idx) => {
-        return <Row key={idx} />;
+        if (turn == idx) {
+          return <Row key={idx} currentGuess={currentGuess} />;
+        }
+        return <Row key={idx} guess={guess} />;
       })}
     </div>
   );

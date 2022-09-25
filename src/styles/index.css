@@ -133,11 +133,79 @@ textarea:focus {
 }
 
 .Box {
+  --bg-color: var(--white-100);
+  --border-color: var(var(--black-200));
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: 1px solid currentColor;
-  font-weight: 600;
+  font-weight: 900;
   font-size: 24px;
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  outline: 1px solid var(--border-color);
+  text-transform: uppercase;
+}
+
+.Box.green {
+  --color: var(--white-100);
+  --bg-color: #5ac85a;
+  --border-color: #5ac85a;
+  animation: flip 500ms ease forwards;
+}
+
+.Box.yellow {
+  --bg-color: #e2cc68;
+  --border-color: #e2cc68;
+  animation: flip 500ms ease forwards;
+}
+
+.Box.grey {
+  --bg-color: #a1a1a1;
+  --border-color: #a1a1a1;
+  animation: flip 500ms ease forwards;
+}
+
+.Box:nth-child(1) {
+  animation-delay: 0;
+}
+
+.Box:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.Box:nth-child(3) {
+  animation-delay: 400ms;
+}
+
+.Box:nth-child(4) {
+  animation-delay: 600ms;
+}
+
+.Box:nth-child(5) {
+  animation-delay: 800ms;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+    background-color: var(--white-100);
+    color: var(var(--black-200));
+  }
+
+  45% {
+    transform: rotateX(90deg);
+    background-color: var(--white-100);
+    color: var(var(--black-200));
+  }
+
+  55% {
+    transform: rotateX(90deg);
+    background-color: var(--bg-color);
+    color: var(--color);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+  }
 }
