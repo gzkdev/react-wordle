@@ -1,22 +1,28 @@
 import { useState } from "react";
 
+/**
+ * Interface of a Guess object
+ */
+interface Guess {
+  key: string;
+  color: string;
+}
+
 export default function useWordle(solution: string) {
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
-  const [guesses, setGuesses] = useState<
-    {
-      key: string;
-      color: string;
-    }[]
-  >([]);
+  const [guesses, setGuesses] = useState<Array<Guess[] | undefined>>([
+    ...Array(6),
+  ]);
   const [history, setHistory] = useState<string[]>([]);
   const [isCorrect, setisCorrect] = useState(false);
 
-  // format a guess into an array of letter objects
-  // e.g [{key: 'a', color: 'yellow'}]
+  /**
+   * Format a guess into an array of letter objects e.g [{key: 'a', color: 'yellow'}]
+   */
   function formatGuess() {
-    let solutionArray: any = [...solution];
-    let formatedGuess = [...currentGuess].map((char) => {
+    let solutionArray: Array<string | null> = [...solution];
+    let formatedGuess: Array<Guess> = [...currentGuess].map((char) => {
       return { key: char, color: "grey" };
     });
 
@@ -37,15 +43,11 @@ export default function useWordle(solution: string) {
     return formatedGuess;
   }
 
-  function addNewGuess(
-    formattedGuess: {
-      key: string;
-      color: string;
-    }[]
-  ) {
+  function addNewGuess(formattedGuess: Guess[]) {
     if (currentGuess === solution) {
       setisCorrect(true);
     }
+
     setGuesses((guesses) => {
       let newGuesses = [...guesses];
       newGuesses[turn] = formattedGuess;
