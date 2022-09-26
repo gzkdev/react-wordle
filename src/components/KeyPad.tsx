@@ -28,7 +28,7 @@ function KeyPad({ usedkeys }: Prop) {
       {letters &&
         letters.map((l: any, idx) => {
           return (
-            <div className="Key" key={idx}>
+            <div className="Key" data-color={usedkeys?.[l.key]} key={idx}>
               {l.key}
             </div>
           );
