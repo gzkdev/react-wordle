@@ -8,6 +8,8 @@ export interface Guess {
   color: string;
 }
 
+export interface UsedKeys extends Record<string, any> {}
+
 export default function useWordle(solution: string) {
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState("");
@@ -16,6 +18,7 @@ export default function useWordle(solution: string) {
   ]);
   const [history, setHistory] = useState<string[]>([]);
   const [isCorrect, setisCorrect] = useState(false);
+  const [usedKeys, setUsedKeys] = useState<UsedKeys>({});
 
   /**
    * Format a guess into an array of letter objects e.g [{key: 'a', color: 'yellow'}]
@@ -59,6 +62,35 @@ export default function useWordle(solution: string) {
     });
 
     setTurn((turn) => turn + 1);
+
+    setUsedKeys((usedKeys) => {
+      let newKeys = { ...usedKeys };
+
+      formattedGuess.forEach((l) => {
+        const currentColor = usedKeys[l.key];
+
+        if (l.color === "green") {
+          newKeys[l.key] = "green";
+          return;
+        }
+
+        if (l.color === "yellow" && currentColor !== "green") {
+          newKeys[l.key] = "yellow";
+          return;
+        }
+
+        if (
+          l.color === "grey" &&
+          currentColor !== "green" &&
+          currentColor !== "yellow"
+        ) {
+          newKeys[l.key] = "grey";
+          return;
+        }
+
+        return newKeys;
+      });
+    });
     setCurrentGuess("");
   }
 
@@ -98,5 +130,6 @@ export default function useWordle(solution: string) {
     guesses,
     isCorrect,
     handleKeyUp,
+    usedKeys,
   };
 }
