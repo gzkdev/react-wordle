@@ -37,7 +37,7 @@ export default function useWordle(solution: string) {
     });
 
     formatedGuess.forEach((char, i) => {
-      if (solutionArray[i]?.includes(char.key) && char.color !== "green") {
+      if (solutionArray.includes(char.key) && char.color !== "green") {
         formatedGuess[i].color = "yellow";
         solutionArray[solutionArray.indexOf(char.key)] = null;
       }
@@ -64,33 +64,25 @@ export default function useWordle(solution: string) {
     setTurn((turn) => turn + 1);
 
     setUsedKeys((usedKeys) => {
-      let newKeys = { ...usedKeys };
+      formattedGuess.forEach((guess) => {
+        let currentColor = usedKeys?.[guess.key];
 
-      formattedGuess.forEach((l) => {
-        const currentColor = usedKeys[l.key];
-
-        if (l.color === "green") {
-          newKeys[l.key] = "green";
-          return;
+        if (guess.color === "green") {
+          return (usedKeys[guess.key] = "green");
         }
 
-        if (l.color === "yellow" && currentColor !== "green") {
-          newKeys[l.key] = "yellow";
-          return;
+        if (guess.color === "yellow" && currentColor !== "green") {
+          return (usedKeys[guess.key] = "yellow");
         }
 
-        if (
-          l.color === "grey" &&
-          currentColor !== "green" &&
-          currentColor !== "yellow"
-        ) {
-          newKeys[l.key] = "grey";
-          return;
+        if (guess.color === "grey" && currentColor !== ("green" || "yellow")) {
+          return (usedKeys[guess.key] = "grey");
         }
-
-        return newKeys;
       });
+
+      return usedKeys;
     });
+
     setCurrentGuess("");
   }
 
@@ -108,9 +100,8 @@ export default function useWordle(solution: string) {
         return console.log("Word must be 5 letters long");
       }
 
-      const formatted = formatGuess();
-      // console.log(formatted);
-      addNewGuess(formatted);
+      const formattedGuess = formatGuess();
+      addNewGuess(formattedGuess);
     }
 
     if (e.key === "Backspace") {

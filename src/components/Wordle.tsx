@@ -17,9 +17,7 @@ function Wordle({ solution }: WordleProp) {
     return;
   }, [handleKeyUp]);
 
-  useEffect(() => {
-    console.log(guesses, turn, isCorrect);
-  }, [guesses, turn, isCorrect]);
+  useEffect(() => {}, [guesses, turn, isCorrect]);
   return (
     <div>
       {/* Wordle {solution}

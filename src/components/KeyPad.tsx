@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UsedKeys } from "../hooks/useWordle";
 
 interface Prop {
@@ -12,7 +12,6 @@ function KeyPad({ usedkeys }: Prop) {
     try {
       let res = await fetch("http://localhost:3001/letters");
       let data = await res.json();
-      console.log(data);
       setLetters(data);
     } catch (e) {
       console.log(e);
