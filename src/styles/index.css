@@ -116,20 +116,21 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: 60vh;
 }
 
 .Grid {
   width: 100%;
   max-width: 480px;
   display: grid;
+  justify-content: center;
   gap: 12px;
 }
 
 .Row {
-  width: 100%;
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(6, 64px);
+  grid-template-columns: repeat(5, 64px);
 }
 
 .Box {
@@ -188,6 +189,38 @@ textarea:focus {
 
 .Row.current > .Box.filled {
   animation: bounce 200ms ease-in-out forwards;
+}
+
+.KeyPad {
+  width: 90%;
+  max-width: 480px;
+  margin: 24px auto 64px;
+}
+
+.Key {
+  margin: 5px;
+  width: 40px;
+  height: 50px;
+  background-color: var(--white-100);
+  display: inline-block;
+  border-radius: 6px;
+  line-height: 50px;
+  transition: ease-in 200ms;
+}
+
+.Key[data-color="green"] {
+  background-color: #5ac85a;
+  color: var(--white-100);
+}
+
+.Key[data-color="grey"] {
+  background-color: #a1a1a1;
+  color: var(--white-100);
+}
+
+.Key[data-color="yellow"] {
+  background-color: #e2cc68;
+  color: var(--white-100);
 }
 
 @keyframes flip {

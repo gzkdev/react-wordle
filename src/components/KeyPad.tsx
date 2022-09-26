@@ -6,12 +6,13 @@ interface Prop {
 }
 
 function KeyPad({ usedkeys }: Prop) {
-  const [letters, setLetters] = useState<any>();
+  const [letters, setLetters] = useState<any[]>([]);
 
   async function fetchLetters() {
     try {
       let res = await fetch("http://localhost:3001/letters");
       let data = await res.json();
+      console.log(data);
       setLetters(data);
     } catch (e) {
       console.log(e);
@@ -20,16 +21,15 @@ function KeyPad({ usedkeys }: Prop) {
 
   useEffect(() => {
     fetchLetters();
+    console.log("used keys", usedkeys);
   }, []);
 
   return (
     <div className="KeyPad">
       {letters &&
-        letters.map((l: any) => {
-          const color = usedkeys[l.key];
-
+        letters.map((l: any, idx) => {
           return (
-            <div className="Key" key={l.key}>
+            <div className="Key" key={idx}>
               {l.key}
             </div>
           );
