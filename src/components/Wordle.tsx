@@ -21,8 +21,8 @@ function Wordle({ solution }: WordleProp) {
   }, [guesses, turn, isCorrect]);
   return (
     <div>
-      Wordle {solution}
-      <div>Current Guess - {currentGuess}</div>
+      {/* Wordle {solution}
+      <div>Current Guess - {currentGuess}</div> */}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>
   );
