@@ -7,7 +7,7 @@ interface Prop {
 function Row({ guess, currentGuess }: Prop) {
   if (guess) {
     return (
-      <div className="Row Past">
+      <div className="Row past">
         {guess.map((char, idx) => {
           return (
             <div key={idx} className={`Box ${char.color}`}>
@@ -22,10 +22,10 @@ function Row({ guess, currentGuess }: Prop) {
   if (currentGuess) {
     let letters = currentGuess.split("");
     return (
-      <div className="Row Current">
+      <div className="Row current">
         {letters.map((letter, idx) => {
           return (
-            <div className="Box" key={idx}>
+            <div className="Box filled" key={idx}>
               {letter}
             </div>
           );

@@ -134,7 +134,7 @@ textarea:focus {
 
 .Box {
   --bg-color: var(--white-100);
-  --border-color: var(var(--black-200));
+  --border-color: #a1a1a1;
   height: 64px;
   display: flex;
   align-items: center;
@@ -186,6 +186,10 @@ textarea:focus {
   animation-delay: 800ms;
 }
 
+.Row.current > .Box.filled {
+  animation: bounce 200ms ease-in-out forwards;
+}
+
 @keyframes flip {
   0% {
     transform: rotateX(0);
@@ -207,5 +211,19 @@ textarea:focus {
 
   100% {
     transform: rotateX(0deg);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+    --border-color: #a1a1a1;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    --border-color: currentColor;
   }
 }
